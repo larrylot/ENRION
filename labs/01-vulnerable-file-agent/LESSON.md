@@ -1,80 +1,121 @@
 # Lab 01 — Lesson Notes
 
-Do not read this until you have answered the questions in the lab README.
+Read this **after** running the lab and writing your own answers.
 
-## 1. Asset
+## The failure in one sentence
 
-The protected asset is:
+The application allowed a model-generated request to become a real file operation without an independent authorization decision.
 
-`workspace/restricted/secret.txt`
+## Asset
 
-In a real system this could instead be:
+The asset was the restricted secret file.
 
-- an API token
-- customer data
-- an SSH key
-- an internal database
-- an administrative API
-- a payment action
+In enterprise systems, the asset could instead be customer data, credentials, source code, a privileged API, an email action, a payment, or the ability to modify infrastructure.
 
-## 2. Who enforced authorization?
+Agent security protects both **information and actions**.
 
-Nobody.
+## Untrusted input
 
-The file tool accepts a path and executes the read.
+The invoice was useful business data and still had to be treated as untrusted.
 
-The LLM is effectively deciding its own access by choosing which path to request.
+> **Useful data can also contain hostile instructions.**
 
-That is the architectural mistake.
+Email, webpages, documents, tool output, and persistent memory can all become delivery mechanisms for indirect prompt injection.
 
-## 3. Why isn't the system prompt enough?
+## Capability and authority
 
-A system prompt influences model behavior.
+The intended task was:
 
-It does not provide deterministic authorization.
+~~~text
+read one public invoice
+~~~
 
-Untrusted content, reasoning errors, malicious instructions, model bugs, or future
-capabilities may all cause the model to request an unsafe action.
+The effective tool authority was:
 
-Security must assume that this happens.
+~~~text
+read any file in the workspace
+~~~
 
-## 4. Where should authorization live?
+That gap is a least-privilege failure.
 
-Outside the model, immediately before the consequential action.
+## Trust boundary
 
-The desired flow is:
+The important boundary is where model output becomes a consequential action:
 
-```text
-Agent proposes action
-        |
-        v
-Policy / authorization
-        |
-   ALLOW or DENY
-        |
-        v
+~~~text
+Model proposal
+      ↓
 Tool execution
-```
+~~~
 
-The model proposes.
+Before the boundary, the model is proposing.
 
-The control plane decides.
+After the boundary, something real has happened.
 
-## 5. What must remain trustworthy?
+## Missing control
 
-Even if the model is completely compromised:
+Nobody answered:
 
-- policy enforcement
+> Is this agent allowed to perform this action on this resource for this task?
+
+The path check in tools.py prevents escaping the demo workspace. It does not perform task-level authorization.
+
+## Why the prompt is insufficient
+
+System prompts affect behavior probabilistically.
+
+Authorization must be enforced deterministically.
+
+A secure design assumes the model may eventually request an unsafe action due to prompt injection, poisoned memory, malicious tool output, reasoning errors, bugs, or capability improvements.
+
+The system must still reject it.
+
+## Correct architecture
+
+~~~text
+User
+  ↓
+Agent
+  ↓ proposes
+Authorization / policy
+  ├── DENY → audit
+  └── ALLOW
+        ↓
+       Tool
+        ↓
+     Resource
+~~~
+
+The enforcement component might be called a policy enforcement point, reference monitor, authorization gateway, tool broker, or control plane.
+
+The name matters less than the boundary.
+
+## Compromise assumption
+
+If the model is fully compromised, these controls must remain outside its authority:
+
 - identity
+- authorization policy
 - credentials
+- policy enforcement
 - runtime isolation
+- network controls
 - audit logging
 - containment
 
-must remain outside the model's authority.
+## Blast radius
 
-## Key concept
+If there were 10,000 restricted files, the attacker would not need a fundamentally new vulnerability for every file.
 
-**Prompt alignment is behavioral guidance. Authorization is a security control.**
+One missing authorization boundary creates a broad exposure.
 
-Do not confuse them.
+## Mental model
+
+~~~text
+MODEL         = untrusted decision maker
+CONTROL PLANE = trusted enforcement
+TOOL          = capability
+RESOURCE      = asset
+~~~
+
+> **Prompt alignment is behavioral guidance. Authorization is a security control.**
