@@ -1,23 +1,51 @@
 # ENRION Learning Journal
 
-Use this after each lab.
+The journal is part of the course. Use it to practice **security reasoning**, not merely to record commands.
+
+Copy this section for every lab.
 
 ## Lab
 
-## What was the protected asset?
+**Number / title:**
 
-## What was untrusted?
+### Before running
+**What do I predict will happen, and why?**
 
-## What action did the agent attempt?
+### Asset
+**What are we protecting?**
 
-## Which trust boundary was crossed?
+### Untrusted inputs
+**Which inputs or components must be treated as untrusted?**
 
-## Which control should have prevented it?
+### Agent authority
+**What can the agent actually do? Is that more than the task requires?**
 
-## Was the control inside or outside the model?
+### Trust boundary
+**Where does model output become a real-world action?**
 
-## What telemetry would I want in production?
+### Failure
+**What failed? Was it a model failure, an architecture failure, or both?**
 
-## What would the blast radius be in a real enterprise?
+### Control
+**Which control should prevent this? Does it live inside or outside the model?**
 
-## One thing I can now explain to another security architect
+### Compromise test
+Assume the model is fully compromised. **Would the control still hold? Why?**
+
+### Telemetry
+**What would I log? What should trigger investigation or containment?**
+
+### Blast radius
+**What is the maximum damage? How could the architecture reduce it?**
+
+### Enterprise mapping
+**What do the toy asset, tool, and input correspond to in a real organization?**
+
+### Explain it
+**Explain the lesson in your own words to another security architect:**
+
+### Challenge
+**What did I modify or try to break after the guided exercise?**
+
+### Principle
+>
