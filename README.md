@@ -1,7 +1,7 @@
 # ENRION
 
 <p align="center">
-  <img src="assets/enrion-logo.png" alt="ENRION logo: blue and purple agent emblem with wordmark" width="460">
+  <img src="assets/enrion-logo-dark.png" alt="ENRION: minimal geometric emblem and wordmark on a dark background" width="560">
 </p>
 
 **Agent security and AI governance, tested through small, reproducible labs.**
