@@ -154,7 +154,8 @@ Authorization
  audit      tool
 ~~~
 
-We build that in Lab 02.
+Continue with [Lab 02](../02-authorized-file-agent/README.md), which implements
+an external authorization check and repeats the same malicious request.
 
 # 8. Optional live LLM exercise
 
@@ -203,4 +204,4 @@ If not, what does that say about blast radius?
 
 > **Prompt instructions influence agent behavior. They do not enforce agent authority.**
 
-Next: **Lab 02 — Tool Authorization & Deny-by-Default**
+Next: [Lab 02: Tool authorization](../02-authorized-file-agent/README.md).
