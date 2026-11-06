@@ -1,0 +1,10 @@
+{
+  "policy_id": "invoice-reader",
+  "version": "0.1.0",
+  "owner": "Lars Ortegren",
+  "purpose": "Read one synthetic invoice for the ENRION authorization exercise",
+  "agent_id": "invoice-agent",
+  "autonomy": "read_only_local",
+  "allowed_resources": ["public/invoice.txt"],
+  "risk_id": "R-01"
+}

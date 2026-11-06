@@ -2,6 +2,10 @@
 
 ENRION teaches agent security as an engineering discipline.
 
+Current implementation: Labs 01 and 02. Labs 03 through 15 below are curriculum
+plans, not completed modules. See [roadmap.md](roadmap.md) for staged priorities
+and [evidence.md](evidence.md) for verified behavior.
+
 ~~~text
 Understand capability
         ↓
@@ -25,6 +29,10 @@ Agents, tools as capabilities, indirect prompt injection, trust boundaries, and 
 
 **Lab 02 — Tool Authorization & Deny-by-Default**  
 Policy enforcement points, resource scope, ALLOW/DENY, fail-closed design, reference-monitor thinking.
+
+Implemented: [Lab 02](../labs/02-authorized-file-agent/README.md), with an offline
+gateway, versioned policy, local decision events and regression tests. Durable
+audit, real identity and runtime isolation remain future work.
 
 **Lab 03 — Identity, Delegation & Audit**  
 Who is acting, on whose behalf, delegated authority, session identity, immutable audit events.
