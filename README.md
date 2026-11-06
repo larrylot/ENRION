@@ -1,5 +1,9 @@
 # ENRION
 
+<p align="center">
+  <img src="assets/enrion-logo.png" alt="ENRION logo: blue and purple agent emblem with wordmark" width="460">
+</p>
+
 **Agent security and AI governance, tested through small, reproducible labs.**
 
 ENRION is an independent learning and security architecture project maintained by
